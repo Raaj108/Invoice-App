@@ -1,0 +1,26 @@
+{
+  "name": "invoice-application",
+  "version": "1.0.0",
+  "description": "This is a simple angularjs invoice application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raaj108/Invoice-App.git"
+  },
+  "keywords": [
+    "invoice",
+    "invoice",
+    "application",
+    "angularjs",
+    "application"
+  ],
+  "author": "Rajan Patil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raaj108/Invoice-App/issues"
+  },
+  "homepage": "https://github.com/Raaj108/Invoice-App#readme"
+}
