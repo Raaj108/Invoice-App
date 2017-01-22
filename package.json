@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/Raaj108/Invoice-App/issues"
   },
-  "homepage": "https://github.com/Raaj108/Invoice-App#readme"
+  "homepage": "https://github.com/Raaj108/Invoice-App#readme",
+  "dependencies": {
+    "bower": "1.8.0"
+  }
 }

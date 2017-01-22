@@ -1,0 +1,29 @@
+{
+  "name": "invoice-application",
+  "description": "This is a simple angularjs invoice application",
+  "main": "index.js",
+  "authors": [
+    "Rajan Patil"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "invoice",
+    "invoice",
+    "application",
+    "angularjs",
+    "application"
+  ],
+  "homepage": "https://github.com/Raaj108/Invoice-App",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "3.1.1",
+    "bootstrap": "3.3.7",
+    "angular": "1.6.1"
+  }
+}
