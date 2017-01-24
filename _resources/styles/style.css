@@ -1,0 +1,21 @@
+body {
+    background-color: #fafafa;
+}
+
+.navbar {
+    height: 80px;
+    background-color: #ffffff;
+    color: black;
+    padding-top: 15px;
+}
+
+.navbar-brand{
+    font-size: 28px;
+    font-family: helvetica sans-serif;
+}
+.sub-title {
+    font-weight: normal;
+    line-height: 1;
+    color: #777;
+    font-size: 13px;
+}
