@@ -2,104 +2,96 @@
 <html lang="">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Title Page</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" media="screen" href="_resources/styles/style.css"> </head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" media="screen" href="_resources/styles/style.css"> </head>
 
 <body ng-app="invoiceApp">
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header"> <a class="navbar-brand" href="#">Invoice-App<span class="sub-title"> An angularjs application</span></a> </div>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header"> <a class="navbar-brand" href="#">Invoice-App<span class="sub-title"> An angularjs application</span></a> </div>
+        </div>
+    </nav>
+    <div class="container" ng-controller="invoiceController">
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-md-offset-6 col-md-6">
+                    <h4 class="text-right">{{today | date}}</h4></div>
+            </div>
+            <h4>Customer's Information</h4>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="customerName" ng-model="customer.customerName" placeholder="Customer's Name"> </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="company" ng-model="customer.company" placeholder="Company"> </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="address" ng-model="customer.address" placeholder="Address"> </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="email" ng-model="email" placeholder="Email"> </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="phone" ng-model="customer.phones" placeholder="Phone"> </div>
+                </div>
+            </form>
+            <hr/>
+            <h4>Products/Services</h4>
+            <table class="table table-striped table-hover table-bordered" id="productTable">
+                <thead>
+                    <tr class="row ">
+                        <th class="col-md-1 text-center">Sr. No</th>
+                        <th class="col-md-6 text-center">Description</th>
+                        <th class="col-md-1 text-center">Quantity</th>
+                        <th class="col-md-1 text-center">Rate</th>
+                        <th class="col-md-2 text-center">Total</th>
+                        <th class="col-md-1 text-center">Add/Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row">
+                        <td class="col-md-1 text-center">
+                            <input type="text" value="{{serialNumbers}}" readonly> </td>
+                        <td class="col-md-6 text-center">
+                            <input type="text" ng-model="description"> </td>
+                        <td class="col-md-1 text-center">
+                            <input type="text" ng-model="quantity" ng-keyup="calculateTotal()"> </td>
+                        <td class="col-md-1 text-center">
+                            <input type="text" ng-model="rate" ng-keyup="calculateTotal()"> </td>
+                        <td class="col-md-2 text-center">
+                            <input type="text" value="{{totalPrice}}" readonly> </td>
+                        <td class="col-md-1 text-center">
+                            <button class="btn btn-primary btn-sm" id="addBtn" ng-click="addRow(product)">Add</button>
+                        </td>
+                    </tr>
+                    <tr class="row" ng-repeat="product in products" ng-if="product.serialNumbers>=1">
+                        <td class="col-md-1 text-center" id="serialNumber">{{product.serialNumbers}}</td>
+                        <td class="col-md-1 text-center">{{product.description}}</td>
+                        <td class="col-md-1 text-center">{{product.quantity}}</td>
+                        <td class="col-md-1 text-center">{{product.rate}}</td>
+                        <td class="col-md-1 text-center">{{product.totalPrice}}</td>
+                        <td class="col-md-1 text-center">
+                            <button class="btn btn-primary btn-sm" id="removeBtn" ng-click="removeRow($event)">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </nav>
-  <div class="container" ng-controller="invoiceController">
-    <div class="wrapper">
-      <div class="row">
-        <div class="col-md-offset-6 col-md-6">
-          <h4 class="text-right">{{today | date}}</h4></div>
-      </div>
-      <h4>Customer's Information</h4>
-      <form class="form-horizontal">
-        <div class="form-group">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="customerName" ng-model="customer.customerName" placeholder="Customer's Name"> </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="company" ng-model="customer.company" placeholder="Company"> </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="address" ng-model="customer.address" placeholder="Address"> </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="email" ng-model="customer.email" placeholder="Email"> </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="phone" ng-model="customer.phones" placeholder="Phone" > </div>
-        </div>
-      </form>
-      <hr/>
-      <h4>Products/Services</h4>
-      <table class="table table-striped table-hover table-bordered" id="productTable">
-        <thead>
-          <tr class="row ">
-            <th class="col-md-1 text-center">Add/Remove</th>
-            <th class="col-md-1 text-center">Sr. No</th>
-            <th class="col-md-6 text-center">Description</th>
-            <th class="col-md-1 text-center">Quantity</th>
-            <th class="col-md-1 text-center">Rate</th>
-            <th class="col-md-2 text-center">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <tr class="row" ng-repeat="product in customer.products" ng-if="product.serialNumbers>=1">
-            <td class="col-md-1 text-center">
-              <button class="btn btn-primary btn-sm" id="removeBtn" ng-click="removeRow($event)">Remove</button>
-            </td>
-            <td class="col-md-1 text-center">
-              <input type="text" name="serialNumber" id="serialNumber" ng-model="product.serialNumbers" readonly> </td>
-            <td class="col-md-6 text-center">
-              <input type="text" name="description" ng-model="product.description"> </td>
-            <td class="col-md-1 text-center">
-              <input type="text" name="quantity" ng-model="product.quantity" ng-keyup="AddNumbers()"> </td>
-            <td class="col-md-1 text-center">
-              <input type="text" name="rate" ng-model="product.rate" ng-keyup="AddNumbers()"> </td>
-            <td class="col-md-2 text-center">
-              <input type="text" name="totalPrice" value="{{product.totalPrice}}" readonly> </td>
-          </tr>
-
-          <tr class="row">
-            <td class="col-md-1 text-center">
-              <button class="btn btn-primary btn-sm" id="addBtn" ng-click="addRow()">Add</button>
-            </td>
-            <td class="col-md-1 text-center">
-              <input type="text" readonly> </td>
-            <td class="col-md-6 text-center">
-              <input type="text" readonly placeholder="Description of Product"> </td>
-            <td class="col-md-1 text-center">
-              <input type="text" placeholder="0"> </td>
-            <td class="col-md-1 text-center">
-              <input type="text" placeholder="0"> </td>
-            <td class="col-md-2 text-center">
-              <input type="text" placeholder="0"> </td>
-          </tr>
-
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <script src="bower_components/jquery/jquery.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="_resources/scripts/app.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="_resources/scripts/app.js"></script>
 </body>
 
 </html>
