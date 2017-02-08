@@ -47,15 +47,27 @@
       </form>
       <hr/>
       <h4>Add Products/Services :</h4>
-      <table class="table table-striped table-hover table-bordered productTable" >
+      <table class="table table-striped table-hover table-bordered productTable">
         <thead>
           <tr class="row ">
-            <th class="col-md-1 text-center">Sr. No</th>
-            <th class="col-md-6 text-center">Description</th>
-            <th class="col-md-1 text-center">Quantity</th>
-            <th class="col-md-1 text-center">Rate</th>
-            <th class="col-md-2 text-center">Total</th>
-            <th class="col-md-1 text-center">Add</th>
+            <th class="col-md-1 text-center">
+              <label>Sr. No</label>
+            </th>
+            <th class="col-md-6 text-center">
+              <label>Description</label>
+            </th>
+            <th class="col-md-1 text-center">
+              <label>Quantity</label>
+            </th>
+            <th class="col-md-1 text-center">
+              <label>Rate</label>
+            </th>
+            <th class="col-md-2 text-center">
+              <label>Total</label>
+            </th>
+            <th class="col-md-1 text-center">
+              <label>Add</label>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -80,21 +92,33 @@
       <table class="table table-striped table-hover table-bordered productTable" id="printTable">
         <thead>
           <tr class="row ">
-            <th class="col-md-1 text-center">Sr. No</th>
-            <th class="col-md-6 text-center">Description</th>
-            <th class="col-md-1 text-center">Quantity</th>
-            <th class="col-md-1 text-center">Rate</th>
-            <th class="col-md-2 text-center">Total</th>
-            <th class="col-md-1 text-center">Remove</th>
+            <th class="col-md-1 text-center">
+              <label>Sr. No</label>
+            </th>
+            <th class="col-md-6 text-center">
+              <label>Description</label>
+            </th>
+            <th class="col-md-1 text-center">
+              <label>Quantity</label>
+            </th>
+            <th class="col-md-1 text-center">
+              <label>Rate</label>
+            </th>
+            <th class="col-md-2 text-center">
+              <label>Total</label>
+            </th>
+            <th class="col-md-1 text-center">
+              <label>Remove</label>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr class="row" ng-repeat="product in products" ng-if="product.serialNumbers>=1">
-            <td class="col-md-1 text-center" id="serialNumber">{{product.serialNumbers}}</td>
-            <td class="col-md-6 text-center">{{product.description | titleCase }}</td>
-            <td class="col-md-1 text-center">{{product.quantity}}</td>
-            <td class="col-md-1 text-center">{{product.rate}}</td>
-            <td class="col-md-2 text-center">{{product.totalPrice}}</td>
+            <td class="col-md-1 text-center" id="serialNumber"><span>{{product.serialNumbers}}</span></td>
+            <td class="col-md-6 text-center"><span>{{product.description | titleCase }}</span></td>
+            <td class="col-md-1 text-center"><span>{{product.quantity}}</span></td>
+            <td class="col-md-1 text-center"><span>{{product.rate}}</span></td>
+            <td class="col-md-2 text-center"><span>{{product.totalPrice}}</span></td>
             <td class="col-md-1 text-center">
               <button class="btn btn-primary btn-sm" id="removeBtn" ng-click="removeRow($event , $index)">Remove</button>
             </td>
@@ -104,13 +128,13 @@
             <td class="col-md-6 text-center"></td>
             <td class="col-md-1 text-center"></td>
             <td class="col-md-1 text-center"></td>
-            <td class="col-md-2 text-center"><strong>Total Amount  {{grandTotalPrice}}</strong></td>
+            <td class="col-md-2 text-center"><span><strong>Total Amount  {{grandTotalPrice}}</strong></span></td>
             <td class="col-md-1 text-center"></td>
           </tr>
         </tbody>
       </table>
       <div class="col-md-offset-5 col-md-4">
-       <button class="btn btn-success btn-md" id="printBtn" ng-click="printData()">Print</button>
+        <button class="btn btn-success btn-md" id="printBtn" ng-click="printData()">Print</button>
       </div>
     </div>
   </div>
@@ -118,6 +142,8 @@
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="_resources/scripts/app.js"></script>
+ 
+
 </body>
 
 </html>

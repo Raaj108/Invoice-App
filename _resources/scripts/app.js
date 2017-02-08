@@ -3,6 +3,12 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
 
   $scope.today = new Date();
 
+  $scope.serialNumbers = 1;
+  $scope.description = "";
+  $scope.quantity = 0;
+  $scope.rate = 0;
+  $scope.totalPrice = 0;
+  $scope.grandTotalPrice = 0;
   $scope.customer = {
     customerName: "",
     company: "",
@@ -10,7 +16,6 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
     email: "",
     phones: ""
   };
-
   $scope.products = [{
     serialNumbers: 0,
     description: "",
@@ -19,12 +24,6 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
     totalPrice: 0
     }];
 
-  $scope.grandTotalPrice = 0;
-  $scope.totalPrice = 0;
-  $scope.serialNumbers = 1;
-  $scope.description = "";
-  $scope.quantity = 0;
-  $scope.rate = 0;
 
   //calcutale Total price
   $scope.calculateTotal = function () {
@@ -85,6 +84,10 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
 }]);
 
 
+myApp.factory('serviceId', function () {
+
+});
+
 myApp.filter('titleCase', function () {
   return function (input) {
     input = input || '';
@@ -92,4 +95,4 @@ myApp.filter('titleCase', function () {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   };
-})
+});
