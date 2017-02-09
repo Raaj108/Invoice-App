@@ -2,6 +2,10 @@ var myApp = angular.module('invoiceApp', []);
 myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($scope, $window, $log) {
 
   $scope.today = new Date();
+  $scope.curPage = 0;
+  $scope.pageSize = 5;
+  $scope.productListLength = 1;
+
 
   $scope.serialNumbers = 1;
   $scope.description = "";
@@ -45,7 +49,8 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
     $scope.quantity = 0;
     $scope.rate = 0;
     $log.info($scope.products);
-    $scope.calculateGrandTotal($scope.products);
+    $scope.calculateGrandTotal($scope.products);  
+    $scope.productListLength++;
   }
 
   //ramove a row
@@ -53,7 +58,6 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
     var selectRemoveRow = angular.element(event.target).parent().parent();
 
     $scope.products.splice(index, 1);
-
     angular.element(selectRemoveRow).remove();
     $scope.serialNumbers--;
     $scope.totalPrice = 0;
@@ -62,6 +66,7 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
     $scope.rate = 0;
     $log.info($scope.products);
     $scope.calculateGrandTotal($scope.products);
+    $scope.productListLength--;
   }
 
   //calculate grand total price
@@ -72,6 +77,14 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
     });
     $scope.grandTotalPrice = $scope.grandTotal;;
   }
+
+  $scope.numberOfPages = function () {
+    if ($scope.productListLength >= 5) {
+      return Math.ceil($scope.productListLength / $scope.pageSize);
+    } else {
+      return 1;
+    }
+  };
 
   //Print
   $scope.printData = function () {
@@ -94,5 +107,13 @@ myApp.filter('titleCase', function () {
     return input.replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
+  };
+});
+
+
+myApp.filter('pagination', function () {
+  return function (input, start) {
+    start = +start;
+    return input.slice(start);
   };
 });
