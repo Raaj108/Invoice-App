@@ -1,11 +1,12 @@
-var myApp = angular.module('invoiceApp', []);
-myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($scope, $window, $log) {
+var myApp = angular.module('invoiceApp', ['angularUtils.directives.dirPagination']);
+myApp.controller('invoiceController', ['$scope', '$window', '$log', 'calculateGrandTotal', function ($scope, $window, $log, calculateGrandTotal) {
 
   $scope.today = new Date();
-  $scope.curPage = 0;
-  $scope.pageSize = 5;
-  $scope.productListLength = 1;
 
+  $scope.sort = function (keyname) {
+    $scope.sortKey = keyname; //set the sortKey to the param passed
+    $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+  }
 
   $scope.serialNumbers = 1;
   $scope.description = "";
@@ -43,14 +44,14 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
       rate: $scope.rate,
       totalPrice: $scope.totalPrice
     });
-    $scope.serialNumbers++;
+    $scope.serialNumbers = $scope.serialNumbers + 1;
     $scope.totalPrice = 0;
     $scope.description = "";
     $scope.quantity = 0;
     $scope.rate = 0;
     $log.info($scope.products);
-    $scope.calculateGrandTotal($scope.products);  
-    $scope.productListLength++;
+    $scope.GrandTotal($scope.products);
+
   }
 
   //ramove a row
@@ -59,32 +60,21 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
 
     $scope.products.splice(index, 1);
     angular.element(selectRemoveRow).remove();
-    $scope.serialNumbers--;
+    $scope.serialNumbers = $scope.serialNumbers - 1;
     $scope.totalPrice = 0;
     $scope.description = "";
     $scope.quantity = 0;
     $scope.rate = 0;
     $log.info($scope.products);
-    $scope.calculateGrandTotal($scope.products);
-    $scope.productListLength--;
+    $scope.GrandTotal($scope.products);
+
   }
 
   //calculate grand total price
-  $scope.calculateGrandTotal = function (products) {
-    $scope.grandTotal = 0;
-    angular.forEach(products, function (value, key) {
-      $scope.grandTotal = $scope.grandTotal + products[key].totalPrice;
-    });
-    $scope.grandTotalPrice = $scope.grandTotal;;
+  $scope.GrandTotal = function (products) {
+    $scope.grandTotalPrice = calculateGrandTotal.getGrandTotal(products);
   }
 
-  $scope.numberOfPages = function () {
-    if ($scope.productListLength >= 5) {
-      return Math.ceil($scope.productListLength / $scope.pageSize);
-    } else {
-      return 1;
-    }
-  };
 
   //Print
   $scope.printData = function () {
@@ -97,23 +87,35 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', function ($s
 }]);
 
 
-myApp.factory('serviceId', function () {
+//Services/Factories
+
+myApp.factory('calculateGrandTotal', function () {
+  var grandTotal
+  var calculateGrandTotal = function (products) {
+    grandTotal = 0;
+    angular.forEach(products, function (value, key) {
+      grandTotal = grandTotal + products[key].totalPrice;
+    });
+  }
+  return {
+    getGrandTotal: function (products) {
+      calculateGrandTotal(products);
+      return grandTotal;
+    }
+  }
+});
+
+myApp.factory('addRow', function () {
 
 });
 
+
+//Filters
 myApp.filter('titleCase', function () {
   return function (input) {
     input = input || '';
     return input.replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
-  };
-});
-
-
-myApp.filter('pagination', function () {
-  return function (input, start) {
-    start = +start;
-    return input.slice(start);
   };
 });

@@ -27,7 +27,7 @@ body {
   margin: 50px auto;
   padding: 20px 30px;
   height: auto;
-  min-height: 900px;
+  min-height: 950px;
   -webkit-box-shadow: -1px 3px 13px 1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: -1px 3px 13px 1px rgba(0, 0, 0, 0.75);
   box-shadow: -1px 3px 13px 1px rgba(0, 0, 0, 0.75);
@@ -38,18 +38,25 @@ body {
   border: none;
 }
 
-ul{
+ul {
   list-style: none;
 }
 
-li{
+li {
   display: inline;
 }
 
+.form-inline {
+  margin: 20px 0;
+}
 
-#pagination{
-  margin-top: 35px !important;
-  margin-bottom: 20px;
+.sort-icon {
+  font-size: 9px;
+  margin-left: 5px;
+}
+
+th {
+  cursor: pointer;
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
