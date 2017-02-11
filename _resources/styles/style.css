@@ -38,19 +38,24 @@ body {
   border: none;
 }
 
-ul{
+ul {
   list-style: none;
 }
 
-li{
+li {
   display: inline;
 }
 
-
-#pagination{
-  
-  margin-bottom: 20px;
+.form-inline {
+  margin: 20px 0;
 }
+
+.sort-icon {
+  font-size: 9px;
+  margin-left: 5px;
+}
+
+
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
   h4 {
