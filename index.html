@@ -33,8 +33,22 @@
                 <div class="form-group">
                     <div class="col-md-1">
                         <h5>Search</h5></div>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <input type="text" ng-model="search" class="form-control" placeholder="Search"> </div>
+                    <div class="col-md-1">
+                        <h5>Units</h5></div>
+                    <div class="col-md-3">
+                        <select id="quantityUnit" class="form-control">
+                            <option ng-repeat="unit in measurementUnit">{{unit}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <h5>Currency</h5></div>
+                    <div class="col-md-3">
+                        <select id="currency" class="form-control">
+                            <option ng-repeat="currency in currencies">{{currency}}</option>
+                        </select>
+                    </div>
                 </div>
                 <invoice-table></invoice-table>
             </form>
