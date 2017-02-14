@@ -2,173 +2,50 @@
 <html lang="">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Title Page</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" media="screen" href="_resources/styles/style.css"> </head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" media="screen" href="_resources/styles/style.css"> </head>
 
 <body ng-app="invoiceApp">
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header"> <a class="navbar-brand" href="#">Invoice-App<span class="sub-title"> An angularjs application</span></a> </div>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header"> <a class="navbar-brand" href="#">Invoice-App<span class="sub-title"> An angularjs application</span></a> </div>
+        </div>
+    </nav>
+    <div class="container" ng-controller="invoiceController">
+        <div class="wrapper">
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-offset-6 col-md-6">
+                        <h4 class="text-right">{{today | date}}</h4></div>
+                </div>
+                <customer-info></customer-info>
+                <hr/>
+                <h4>Add Products/Services :</h4>
+                <add-row></add-row>
+                <hr/>
+                <h4>Products/Services</h4>
+                <!--search -->
+                <div class="form-group">
+                    <div class="col-md-1">
+                        <h5>Search</h5></div>
+                    <div class="col-md-5">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search"> </div>
+                </div>
+                <invoice-table></invoice-table>
+            </form>
+            <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"> </dir-pagination-controls>
+        </div>
     </div>
-  </nav>
-  <div class="container" ng-controller="invoiceController">
-    <div class="wrapper">
-      <div class="row">
-        <div class="col-md-offset-6 col-md-6">
-          <h4 class="text-right">{{today | date}}</h4></div>
-      </div>
-      <h4>Customer's Information</h4>
-      <form class="form-horizontal">
-        <div class="form-group">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="customerName" ng-model="customer.customerName" placeholder="Customer's Name"> </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="company" ng-model="customer.company" placeholder="Company"> </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="address" ng-model="customer.address" placeholder="Address"> </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="email" ng-model="email" placeholder="Email"> </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="phone" ng-model="customer.phones" placeholder="Phone"> </div>
-        </div>
-      </form>
-      <hr/>
-      <h4>Add Products/Services :</h4>
-      <table class="table table-striped table-hover table-bordered productTable">
-        <thead>
-          <tr class="row ">
-            <th class="col-md-1 text-center">
-              <label>Sr. No</label>
-            </th>
-            <th class="col-md-6 text-center">
-              <label>Description</label>
-            </th>
-            <th class="col-md-1 text-center">
-              <label>Quantity</label>
-            </th>
-            <th class="col-md-1 text-center">
-              <label>Rate</label>
-            </th>
-            <th class="col-md-2 text-center">
-              <label>Total</label>
-            </th>
-            <th class="col-md-1 text-center">
-              <label>Add</label>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="row">
-            <td class="col-md-1 text-center">
-              <input type="text" value="{{serialNumbers}}" readonly> </td>
-            <td class="col-md-6 text-center">
-              <input type="text" ng-model="description"> </td>
-            <td class="col-md-1 text-center">
-              <input type="text" ng-model="quantity" ng-keyup="calculateTotal()"> </td>
-            <td class="col-md-1 text-center">
-              <input type="text" ng-model="rate" ng-keyup="calculateTotal()"> </td>
-            <td class="col-md-2 text-center">
-              <input type="text" value="{{totalPrice}}" readonly> </td>
-            <td class="col-md-1 text-center">
-              <button class="btn btn-primary btn-sm" id="addBtn" ng-click="addRow(product)">Add</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="row">
-        <div class="col-md-4">
-          <!--<button class="btn btn-success btn-md" id="printBtn" ng-click="printData()">Print</button>-->
-          <h4>Products/Services</h4>
-        </div>
-
-      </div>
-
-      <!--search -->
-      <form class="form-inline">
-        <div class="form-group">
-          <label>Search</label>
-          <input type="text" ng-model="search" class="form-control" placeholder="Search">
-        </div>
-      </form>
-
-      <table class="table table-striped table-hover table-bordered productTable" id="printTable">
-        <thead>
-          <tr class="row ">
-            <th class="col-md-1 text-center" ng-click="sort('serialNumbers')">
-              <label> Sr. No </label>
-              <span class="glyphicon sort-icon" ng-show="sortKey=='serialNumbers'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-            </th>
-            <th class="col-md-6 text-center" ng-click="sort('description')">
-              <label>Description</label>
-              <span class="glyphicon sort-icon" ng-show="sortKey=='description'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-            </th>
-            <th class="col-md-1 text-center" ng-click="sort('quantity')">
-              <label>Quantity</label>
-              <span class="glyphicon sort-icon" ng-show="sortKey=='quantity'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-            </th>
-            <th class="col-md-1 text-center" ng-click="sort('rate')">
-              <label>Rate</label>
-              <span class="glyphicon sort-icon" ng-show="sortKey=='rate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-            </th>
-            <th class="col-md-2 text-center" ng-click="sort('totalPrice')">
-              <label>Total</label>
-              <span class="glyphicon sort-icon" ng-show="sortKey=='totalPrice'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-            </th>
-            <th class="col-md-1 text-center">
-              <label>Remove</label>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="row" dir-paginate="product in products | orderBy:sortKey:reverse | filter:search | itemsPerPage:5" 
-              ng-show="product.serialNumbers>=1">
-            <td class="col-md-1 text-center" id="serialNumber"><span>{{product.serialNumbers}}</span></td>
-            <td class="col-md-6 text-center"><span>{{product.description | titleCase }}</span></td>
-            <td class="col-md-1 text-center"><span>{{product.quantity}}</span></td>
-            <td class="col-md-1 text-center"><span>{{product.rate}}</span></td>
-            <td class="col-md-2 text-center"><span>{{product.totalPrice}}</span></td>
-            <td class="col-md-1 text-center">
-              <button class="btn btn-primary btn-sm" id="removeBtn" ng-click="removeRow($event , $index)">Remove</button>
-            </td>
-          </tr>
-          <tr class="row">
-            <td class="col-md-1 text-center" id="serialNumber"></td>
-            <td class="col-md-6 text-center"></td>
-            <td class="col-md-1 text-center"></td>
-            <td class="col-md-1 text-center"></td>
-            <td class="col-md-2 text-center"><span><strong>Total Amount  {{grandTotalPrice}}</strong></span></td>
-            <td class="col-md-1 text-center"></td>
-          </tr>
-        </tbody>
-      </table>
-      <dir-pagination-controls
-       max-size="5"
-       direction-links="true"
-       boundary-links="true" >
-    </dir-pagination-controls>
-    </div>
-  </div>
-  <script src="bower_components/jquery/jquery.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="_resources/scripts/app.js"></script>
-  <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
-
-
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="_resources/scripts/app.js"></script>
+    <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
 </body>
 
 </html>
