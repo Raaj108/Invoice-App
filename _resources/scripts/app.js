@@ -3,6 +3,7 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', 'calculateGr
 
   $scope.today = new Date();
 
+  $scope.reverse = true;
   $scope.sort = function (keyname) {
     $scope.sortKey = keyname; //set the sortKey to the param passed
     $scope.reverse = !$scope.reverse; //if true make it false and vice versa
@@ -11,6 +12,8 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', 'calculateGr
   $scope.serialNumbers = 1;
   $scope.description = "";
   $scope.quantity = 0;
+  $scope.measurementUnit = ["Kg.", "Lbs.", "Units"];
+  $scope.currencies = ["&#8377;"];
   $scope.rate = 0;
   $scope.totalPrice = 0;
   $scope.grandTotalPrice = 0;
@@ -26,7 +29,8 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', 'calculateGr
     description: "",
     quantity: 0,
     rate: 0,
-    totalPrice: 0
+    totalPrice: 0,
+
     }];
 
 
@@ -49,17 +53,29 @@ myApp.controller('invoiceController', ['$scope', '$window', '$log', 'calculateGr
     $scope.description = "";
     $scope.quantity = 0;
     $scope.rate = 0;
-    $log.info($scope.products);
+    // $log.info($scope.products);
     $scope.GrandTotal($scope.products);
 
   }
 
   //ramove a row
   $scope.removeRow = function (event, index) {
-    var selectRemoveRow = angular.element(event.target).parent().parent();
 
+    var tempProductArray = [];
+    var selectRemoveRow = angular.element(event.target).parent("tr");
     $scope.products.splice(index, 1);
     angular.element(selectRemoveRow).remove();
+    angular.forEach($scope.products, function (value, key) {
+      tempProductArray.push({
+        serialNumbers: key,
+        description: $scope.products[key].description,
+        quantity: $scope.products[key].quantity,
+        rate: $scope.products[key].rate,
+        totalPrice: $scope.products[key].totalPrice
+      });
+    });
+    $scope.products.length = 0;
+    $scope.products = tempProductArray.concat();
     $scope.serialNumbers = $scope.serialNumbers - 1;
     $scope.totalPrice = 0;
     $scope.description = "";

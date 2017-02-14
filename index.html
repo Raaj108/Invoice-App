@@ -46,27 +46,46 @@
         </div>
       </form>
       <hr/>
+      <ul class="row">
+        <li class="col-md-1">
+          <h5>Unit</h5>
+        </li>
+        <li class="col-md-2">
+          <select id="quantityUnit">
+            <option ng-repeat="unit in measurementUnit">{{unit}}</option>
+          </select>
+        </li>
+        <li class="col-md-1">
+          <h5>Currency</h5>
+        </li>
+        <li class="col-md-2">
+          <select id="currency">
+            <option ng-repeat="currency in currencies">{{currency}}</option>
+          </select>
+        </li>
+      </ul>
+
       <h4>Add Products/Services :</h4>
       <table class="table table-striped table-hover table-bordered productTable">
         <thead>
           <tr class="row ">
             <th class="col-md-1 text-center">
-              <label>Sr. No</label>
+              <label>Sr.No</label>
             </th>
-            <th class="col-md-6 text-center">
+            <th class="col-md-5 text-center">
               <label>Description</label>
             </th>
-            <th class="col-md-1 text-center">
+            <th class="col-md-2 text-center">
               <label>Quantity</label>
             </th>
-            <th class="col-md-1 text-center">
+            <th class="col-md-2 text-center">
               <label>Rate</label>
             </th>
             <th class="col-md-2 text-center">
               <label>Total</label>
             </th>
             <th class="col-md-1 text-center">
-              <label>Add</label>
+              <label></label>
             </th>
           </tr>
         </thead>
@@ -74,16 +93,18 @@
           <tr class="row">
             <td class="col-md-1 text-center">
               <input type="text" value="{{serialNumbers}}" readonly> </td>
-            <td class="col-md-6 text-center">
+            <td class="col-md-5 text-center">
               <input type="text" ng-model="description"> </td>
-            <td class="col-md-1 text-center">
-              <input type="text" ng-model="quantity" ng-keyup="calculateTotal()"> </td>
-            <td class="col-md-1 text-center">
-              <input type="text" ng-model="rate" ng-keyup="calculateTotal()"> </td>
+            <td class="col-md-2 text-center">
+              <input type="text" ng-model="quantity" ng-keyup="calculateTotal()">
+            </td>
+            <td class="col-md-2 text-center">
+              <input type="text" ng-model="rate" ng-keyup="calculateTotal()">
+            </td>
             <td class="col-md-2 text-center">
               <input type="text" value="{{totalPrice}}" readonly> </td>
             <td class="col-md-1 text-center">
-              <button class="btn btn-primary btn-sm" id="addBtn" ng-click="addRow(product)">Add</button>
+              <button class="btn btn-primary btn-md" id="addBtn" ng-click="addRow(product)"><b>+</b></button>
             </td>
           </tr>
         </tbody>
@@ -109,18 +130,18 @@
         <thead>
           <tr class="row ">
             <th class="col-md-1 text-center" ng-click="sort('serialNumbers')">
-              <label> Sr. No </label>
+              <label> Sr.No </label>
               <span class="glyphicon sort-icon" ng-show="sortKey=='serialNumbers'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
             </th>
-            <th class="col-md-6 text-center" ng-click="sort('description')">
+            <th class="col-md-5 text-center" ng-click="sort('description')">
               <label>Description</label>
               <span class="glyphicon sort-icon" ng-show="sortKey=='description'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
             </th>
-            <th class="col-md-1 text-center" ng-click="sort('quantity')">
+            <th class="col-md-2 text-center" ng-click="sort('quantity')">
               <label>Quantity</label>
               <span class="glyphicon sort-icon" ng-show="sortKey=='quantity'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
             </th>
-            <th class="col-md-1 text-center" ng-click="sort('rate')">
+            <th class="col-md-2 text-center" ng-click="sort('rate')">
               <label>Rate</label>
               <span class="glyphicon sort-icon" ng-show="sortKey=='rate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
             </th>
@@ -129,37 +150,35 @@
               <span class="glyphicon sort-icon" ng-show="sortKey=='totalPrice'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
             </th>
             <th class="col-md-1 text-center">
-              <label>Remove</label>
+              <label></label>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr class="row" dir-paginate="product in products | orderBy:sortKey:reverse | filter:search | itemsPerPage:5" 
-              ng-show="product.serialNumbers>=1">
+          <tr class="row" dir-paginate="product in products | orderBy:sortKey:reverse | filter:search | itemsPerPage:10" ng-show="product.serialNumbers>=1">
             <td class="col-md-1 text-center" id="serialNumber"><span>{{product.serialNumbers}}</span></td>
-            <td class="col-md-6 text-center"><span>{{product.description | titleCase }}</span></td>
-            <td class="col-md-1 text-center"><span>{{product.quantity}}</span></td>
-            <td class="col-md-1 text-center"><span>{{product.rate}}</span></td>
+            <td class="col-md-5 text-center"><span>{{product.description | titleCase }}</span></td>
+            <td class="col-md-2 text-center"><span>{{product.quantity}}</span></td>
+            <td class="col-md-2 text-center"><span>{{product.rate}}</span></td>
             <td class="col-md-2 text-center"><span>{{product.totalPrice}}</span></td>
             <td class="col-md-1 text-center">
-              <button class="btn btn-primary btn-sm" id="removeBtn" ng-click="removeRow($event , $index)">Remove</button>
+              <button class="btn btn-danger btn-md" id="removeBtn" ng-click="removeRow($event , $index)"><b>X</b></button>
             </td>
           </tr>
           <tr class="row">
             <td class="col-md-1 text-center" id="serialNumber"></td>
-            <td class="col-md-6 text-center"></td>
+            <td class="col-md-5 text-center"></td>
             <td class="col-md-1 text-center"></td>
-            <td class="col-md-1 text-center"></td>
+            <td class="col-md-2 text-center"></td>
             <td class="col-md-2 text-center"><span><strong>Total Amount  {{grandTotalPrice}}</strong></span></td>
-            <td class="col-md-1 text-center"></td>
+            <td class="col-md-1 text-center">
+              <button class="btn btn-default btn-md" id="saveBtn" ng-click=""><b><span class="glyphicon glyphicon-floppy-disk"></span></b></button>
+            </td>
           </tr>
         </tbody>
       </table>
-      <dir-pagination-controls
-       max-size="5"
-       direction-links="true"
-       boundary-links="true" >
-    </dir-pagination-controls>
+      <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+      </dir-pagination-controls>
     </div>
   </div>
   <script src="bower_components/jquery/jquery.js"></script>
