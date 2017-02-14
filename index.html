@@ -2,64 +2,48 @@
 <html lang="">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title Page</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" media="screen" href="_resources/styles/style.css"> </head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Title Page</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" media="screen" href="_resources/styles/style.css"> </head>
 
 <body ng-app="invoiceApp">
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header"> <a class="navbar-brand" href="#">Invoice-App<span class="sub-title"> An angularjs application</span></a> </div>
-        </div>
-    </nav>
-    <div class="container" ng-controller="invoiceController">
-        <div class="wrapper">
-            <form class="form-horizontal">
-                <div class="row">
-                    <div class="col-md-offset-6 col-md-6">
-                        <h4 class="text-right">{{today | date}}</h4></div>
-                </div>
-                <customer-info></customer-info>
-                <hr/>
-                <h4>Add Products/Services :</h4>
-                <add-row></add-row>
-                <hr/>
-                <h4>Products/Services</h4>
-                <!--search -->
-                <div class="form-group">
-                    <div class="col-md-1">
-                        <h5>Search</h5></div>
-                    <div class="col-md-3">
-                        <input type="text" ng-model="search" class="form-control" placeholder="Search"> </div>
-                    <div class="col-md-1">
-                        <h5>Units</h5></div>
-                    <div class="col-md-3">
-                        <select id="quantityUnit" class="form-control">
-                            <option ng-repeat="unit in measurementUnit">{{unit}}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-1">
-                        <h5>Currency</h5></div>
-                    <div class="col-md-3">
-                        <select id="currency" class="form-control">
-                            <option ng-repeat="currency in currencies">{{currency}}</option>
-                        </select>
-                    </div>
-                </div>
-                <invoice-table></invoice-table>
-            </form>
-            <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"> </dir-pagination-controls>
-        </div>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header"> <a class="navbar-brand" href="#">Invoice-App<span class="sub-title"> An angularjs application</span></a> </div>
     </div>
-    <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="_resources/scripts/app.js"></script>
-    <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+  </nav>
+  <div class="container" ng-controller="invoiceController">
+    <div class="wrapper">
+      <form class="form-horizontal">
+        <div class="row">
+          <div class="col-md-offset-6 col-md-6">
+            <h4 class="text-right">{{today | date}}</h4></div>
+        </div>
+        <customer-info></customer-info>
+        <hr/>
+        <h4>Add Products/Services :</h4>
+        <add-row></add-row>
+        <hr/>
+        <h4>Products/Services</h4>
+        <!--search -->
+        <tools></tools>
+        <!--Invoice Table -->
+        <invoice-table></invoice-table>
+      </form>
+      <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"> </dir-pagination-controls>
+    </div>
+  </div>
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script data-require="angular.js@1.2.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js" data-semver="1.2.16"></script>
+
+  <script src="_resources/scripts/app.js"></script>
+  <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
 </body>
 
 </html>
