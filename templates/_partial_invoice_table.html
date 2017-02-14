@@ -2,38 +2,40 @@
     <thead>
         <tr class="row ">
             <th class="col-md-1 text-center" ng-click="sort('serialNumbers')">
-                <label> Sr. No </label> <span class="glyphicon sort-icon" ng-show="sortKey=='serialNumbers'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> </th>
-            <th class="col-md-6 text-center" ng-click="sort('description')">
+                <label> Sr.No </label> <span class="glyphicon sort-icon" ng-show="sortKey=='serialNumbers'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> </th>
+            <th class="col-md-5 text-center" ng-click="sort('description')">
                 <label>Description</label> <span class="glyphicon sort-icon" ng-show="sortKey=='description'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> </th>
-            <th class="col-md-1 text-center" ng-click="sort('quantity')">
+            <th class="col-md-2 text-center" ng-click="sort('quantity')">
                 <label>Quantity</label> <span class="glyphicon sort-icon" ng-show="sortKey=='quantity'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> </th>
-            <th class="col-md-1 text-center" ng-click="sort('rate')">
+            <th class="col-md-2 text-center" ng-click="sort('rate')">
                 <label>Rate</label> <span class="glyphicon sort-icon" ng-show="sortKey=='rate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> </th>
             <th class="col-md-2 text-center" ng-click="sort('totalPrice')">
                 <label>Total</label> <span class="glyphicon sort-icon" ng-show="sortKey=='totalPrice'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> </th>
             <th class="col-md-1 text-center">
-                <label>Remove</label>
+                <label></label>
             </th>
         </tr>
     </thead>
     <tbody>
-        <tr class="row" dir-paginate="product in products | orderBy:sortKey:reverse | filter:search | itemsPerPage:5" ng-show="product.serialNumbers>=1">
+        <tr class="row" dir-paginate="product in products | orderBy:sortKey:reverse | filter:search | itemsPerPage:10" ng-show="product.serialNumbers>=1">
             <td class="col-md-1 text-center" id="serialNumber"><span>{{product.serialNumbers}}</span></td>
-            <td class="col-md-6 text-center"><span>{{product.description | titleCase }}</span></td>
-            <td class="col-md-1 text-center"><span>{{product.quantity}}</span></td>
-            <td class="col-md-1 text-center"><span>{{product.rate}}</span></td>
+            <td class="col-md-5 text-center"><span>{{product.description | titleCase }}</span></td>
+            <td class="col-md-2 text-center"><span>{{product.quantity}}</span></td>
+            <td class="col-md-2 text-center"><span>{{product.rate}}</span></td>
             <td class="col-md-2 text-center"><span>{{product.totalPrice}}</span></td>
             <td class="col-md-1 text-center">
-                <button class="btn btn-primary btn-sm" id="removeBtn" ng-click="removeRow($event , $index)">Remove</button>
+                <button class="btn btn-danger btn-md" id="removeBtn" ng-click="removeRow($event , $index)"><b>X</b></button>
             </td>
         </tr>
         <tr class="row">
             <td class="col-md-1 text-center" id="serialNumber"></td>
-            <td class="col-md-6 text-center"></td>
+            <td class="col-md-5 text-center"></td>
             <td class="col-md-1 text-center"></td>
-            <td class="col-md-1 text-center"></td>
+            <td class="col-md-2 text-center"></td>
             <td class="col-md-2 text-center"><span><strong>Total Amount  {{grandTotalPrice}}</strong></span></td>
-            <td class="col-md-1 text-center"></td>
+            <td class="col-md-1 text-center">
+                <button class="btn btn-default btn-md" id="saveBtn" ng-click=""><b><span class="glyphicon glyphicon-floppy-disk"></span></b></button>
+            </td>
         </tr>
     </tbody>
 </table>

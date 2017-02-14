@@ -2,22 +2,22 @@
     <thead>
         <tr class="row ">
             <th class="col-md-1 text-center">
-                <label>Sr. No</label>
+                <label>Sr.No</label>
             </th>
-            <th class="col-md-6 text-center">
+            <th class="col-md-5 text-center">
                 <label>Description</label>
             </th>
-            <th class="col-md-1 text-center">
+            <th class="col-md-2 text-center">
                 <label>Quantity</label>
             </th>
-            <th class="col-md-1 text-center">
+            <th class="col-md-2 text-center">
                 <label>Rate</label>
             </th>
             <th class="col-md-2 text-center">
                 <label>Total</label>
             </th>
             <th class="col-md-1 text-center">
-                <label>Add</label>
+                <label></label>
             </th>
         </tr>
     </thead>
@@ -25,16 +25,16 @@
         <tr class="row">
             <td class="col-md-1 text-center">
                 <input type="text" value="{{serialNumbers}}" readonly> </td>
-            <td class="col-md-6 text-center">
+            <td class="col-md-5 text-center">
                 <input type="text" ng-model="description"> </td>
-            <td class="col-md-1 text-center">
+            <td class="col-md-2 text-center">
                 <input type="text" ng-model="quantity" ng-keyup="calculateTotal()"> </td>
-            <td class="col-md-1 text-center">
+            <td class="col-md-2 text-center">
                 <input type="text" ng-model="rate" ng-keyup="calculateTotal()"> </td>
             <td class="col-md-2 text-center">
                 <input type="text" value="{{totalPrice}}" readonly> </td>
             <td class="col-md-1 text-center">
-                <button class="btn btn-primary btn-sm" id="addBtn" ng-click="addRow(product)">Add</button>
+                <button class="btn btn-primary btn-md" id="addBtn" ng-click="addRow(product)"><b>+</b></button>
             </td>
         </tr>
     </tbody>

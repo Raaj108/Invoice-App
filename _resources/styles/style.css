@@ -23,7 +23,7 @@ body {
 
 .wrapper {
   background-color: white;
-  width: 75%;
+  width: 85%;
   margin: 50px auto;
   padding: 20px 30px;
   height: auto;
@@ -51,8 +51,16 @@ li {
 }
 
 .sort-icon {
-  font-size: 9px;
-  margin-left: 5px;
+  font-size: 8px;
+  margin-left: 2px;
+}
+
+th {
+  cursor: pointer;
+}
+
+#quantity{
+  
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
