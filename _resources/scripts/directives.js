@@ -1,5 +1,11 @@
 //Directives
 angular.module('invoiceApp')
+.directive('navigationBar', function () {
+    return {
+      restrict: 'EA',
+      templateUrl: 'templates/_partial_navbar.html'
+    }
+  })
   .directive('customerInfo', function () {
     return {
       restrict: 'EA',

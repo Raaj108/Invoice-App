@@ -1,0 +1,21 @@
+<div class="container" ng-controller="invoiceController">
+  <div class="wrapper">
+    <form class="form-horizontal" name="invoiceForm" id="invoiceForm" ng-submit="generateJson(this,$event)">
+      <div class="row">
+        <div class="col-md-offset-6 col-md-6">
+          <h4 class="text-right">{{today | date}}</h4></div>
+      </div>
+      <customer-info></customer-info>
+      <hr/>
+      <h4>Add Products/Services :</h4>
+      <!--search -->
+      <tools></tools>
+      <add-row></add-row>
+      <hr/>
+      <h4>Products/Services</h4>
+      <!--Invoice Table -->
+      <invoice-table></invoice-table>
+    </form>
+    <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"> </dir-pagination-controls>
+  </div>
+</div>
