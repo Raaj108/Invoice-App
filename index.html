@@ -11,38 +11,19 @@
   <link rel="stylesheet" media="screen" href="_resources/styles/style.css"> </head>
 
 <body ng-app="invoiceApp">
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header"> <a class="navbar-brand" href="#">Invoice-App<span class="sub-title"> An angularjs application</span></a> </div>
-    </div>
-  </nav>
-  <div class="container" ng-controller="invoiceController">
-    <div class="wrapper">
-      <form class="form-horizontal">
-        <div class="row">
-          <div class="col-md-offset-6 col-md-6">
-            <h4 class="text-right">{{today | date}}</h4></div>
-        </div>
-        <customer-info></customer-info>
-        <hr/>
-        <h4>Add Products/Services :</h4>
-        <add-row></add-row>
-        <hr/>
-        <h4>Products/Services</h4>
-        <!--search -->
-        <tools></tools>
-        <!--Invoice Table -->
-        <invoice-table></invoice-table>
-      </form>
-      <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"> </dir-pagination-controls>
-    </div>
-  </div>
+  <navigation-bar></navigation-bar>
+ 
+  <div ui-view></div>
   <script src="bower_components/jquery/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/angular/angular.js"></script>
-  <script data-require="angular.js@1.2.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js" data-semver="1.2.16"></script>
-
   <script src="_resources/scripts/app.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="_resources/scripts/config.js"></script>
+  <script src="_resources/scripts/filters.js"></script>
+  <script src="_resources/scripts/directives.js"></script>
+  <script src="_resources/scripts/services.js"></script>
+  <script src="_resources/scripts/controllers.js"></script>
   <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
 </body>
 
